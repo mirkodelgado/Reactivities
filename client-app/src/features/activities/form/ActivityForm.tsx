@@ -1,12 +1,9 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Button, Form, Grid, Segment } from "semantic-ui-react";
-import {
-  ActivityFormValues
-} from "../../../app/models/activity";
+import { ActivityFormValues } from "../../../app/models/activity";
 
 import { v4 as uuid } from "uuid";
 
-import ActivityStore from "../../../app/stores/activityStore";
 import { observer } from "mobx-react-lite";
 import { RouteComponentProps } from "react-router-dom";
 
@@ -17,20 +14,29 @@ import SelectInput from "../../../app/common/form/SelectInput";
 import { category } from "../../../app/common/options/categoryOptions";
 import DateInput from "../../../app/common/form/DateInput";
 import { combineDateAndTime } from "../../../app/common/util/util";
-import { combineValidators, composeValidators, hasLengthGreaterThan, isRequired } from 'revalidate';
+import {
+  combineValidators,
+  composeValidators,
+  hasLengthGreaterThan,
+  isRequired,
+} from "revalidate";
+import { RootStoreContext } from "../../../app/stores/rootStore";
+import PageTitle from "../../../app/common/form/PageTitle";
 
 const validate = combineValidators({
-  title: isRequired({message: 'The Title is required'}),
-  category: isRequired('Category'),
+  title: isRequired({ message: "The Title is required" }),
+  category: isRequired("Category"),
   description: composeValidators(
-    isRequired('Description'),
-    hasLengthGreaterThan(4)({message: 'Description needs to be at least 5 characters'})
+    isRequired("Description"),
+    hasLengthGreaterThan(4)({
+      message: "Description needs to be at least 5 characters",
+    })
   )(),
-  city: isRequired('City'),
-  venue: isRequired('Venue'),
-  date: isRequired('Date'),
-  time: isRequired('Time')
-})
+  city: isRequired("City"),
+  venue: isRequired("Venue"),
+  date: isRequired("Date"),
+  time: isRequired("Time"),
+});
 
 interface DetailParams {
   id: string;
@@ -40,13 +46,13 @@ const ActivityForm: React.FC<RouteComponentProps<DetailParams>> = ({
   match,
   history,
 }) => {
-  const activityStore = useContext(ActivityStore);
+  const rootStore = useContext(RootStoreContext);
   const {
     createActivity,
     editActivity,
     submitting,
     loadActivity,
-  } = activityStore;
+  } = rootStore.activityStore;
 
   const [activity, setActivity] = useState(new ActivityFormValues());
   const [loading, setLoading] = useState(false);
@@ -80,91 +86,96 @@ const ActivityForm: React.FC<RouteComponentProps<DetailParams>> = ({
   };
 
   return (
-    <Grid>
-      <Grid.Column width={10}>
-        <Segment clearing>
-          <FinalForm
-            validate= {validate}
-            initialValues={activity}
-            onSubmit={handleFinalFormSubmit}
-            render={({ handleSubmit, invalid, pristine }) => (
-              <Form onSubmit={handleSubmit} loading={loading}>
-                <Field
-                  name="title"
-                  placeholder="Title"
-                  value={activity.title}
-                  component={TextInput}
-                />
-                <Field
-                  name="description"
-                  placeholder="Description"
-                  rows={3}
-                  value={activity.description}
-                  component={TextAreaInput}
-                />
-                <Field
-                  name="category"
-                  placeholder="Category"
-                  value={activity.category}
-                  options={category}
-                  component={SelectInput}
-                />
 
-                <Form.Group widths="equal">
+    <>
+      <PageTitle title="New Activity" />
+
+      <Grid>
+        <Grid.Column width={10}>
+          <Segment clearing>
+            <FinalForm
+              validate={validate}
+              initialValues={activity}
+              onSubmit={handleFinalFormSubmit}
+              render={({ handleSubmit, invalid, pristine }) => (
+                <Form onSubmit={handleSubmit} loading={loading}>
                   <Field
-                    name="date"
-                    date={true}
-                    placeholder="Date"
-                    value={activity.date}
-                    component={DateInput}
+                    name="title"
+                    placeholder="Title"
+                    value={activity.title}
+                    component={TextInput}
                   />
                   <Field
-                    name="time"
-                    time={true}
-                    placeholder="Time"
-                    value={activity.date}
-                    component={DateInput}
+                    name="description"
+                    placeholder="Description"
+                    rows={3}
+                    value={activity.description}
+                    component={TextAreaInput}
                   />
-                </Form.Group>
+                  <Field
+                    name="category"
+                    placeholder="Category"
+                    value={activity.category}
+                    options={category}
+                    component={SelectInput}
+                  />
 
-                <Field
-                  component={TextInput}
-                  name="city"
-                  placeholder="City"
-                  value={activity.city}
-                />
-                <Field
-                  component={TextInput}
-                  name="venue"
-                  placeholder="Venue"
-                  value={activity.venue}
-                />
+                  <Form.Group widths="equal">
+                    <Field
+                      name="date"
+                      date={true}
+                      placeholder="Date"
+                      value={activity.date}
+                      component={DateInput}
+                    />
+                    <Field
+                      name="time"
+                      time={true}
+                      placeholder="Time"
+                      value={activity.date}
+                      component={DateInput}
+                    />
+                  </Form.Group>
 
-                <Button
-                  loading={submitting}
-                  disabled={loading || invalid || pristine}
-                  floated="right"
-                  positive
-                  type="submit"
-                  content="Submit"
-                />
-                <Button
-                  onClick={
-                    activity.id
-                      ? () => history.push(`/activities/${activity.id}`)
-                      : () => history.push("/activities")
-                  }
-                  disabled={loading}
-                  floated="right"
-                  type="button"
-                  content="Cancel"
-                />
-              </Form>
-            )}
-          />
-        </Segment>
-      </Grid.Column>
-    </Grid>
+                  <Field
+                    component={TextInput}
+                    name="city"
+                    placeholder="City"
+                    value={activity.city}
+                  />
+                  <Field
+                    component={TextInput}
+                    name="venue"
+                    placeholder="Venue"
+                    value={activity.venue}
+                  />
+
+                  <Button
+                    loading={submitting}
+                    disabled={loading || invalid || pristine}
+                    floated="right"
+                    positive
+                    type="submit"
+                    content="Submit"
+                  />
+                  <Button
+                    onClick={
+                      activity.id
+                        ? () => history.push(`/activities/${activity.id}`)
+                        : () => history.push("/activities")
+                    }
+                    disabled={loading}
+                    floated="right"
+                    type="button"
+                    content="Cancel"
+                  />
+                </Form>
+              )}
+            />
+          </Segment>
+        </Grid.Column>
+      </Grid>
+    </>
   );
 };
 

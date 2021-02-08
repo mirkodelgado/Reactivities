@@ -10,6 +10,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Persistence;
 
+using AutoMapper;
+
 namespace API
 {
     public class Startup
@@ -24,10 +26,24 @@ namespace API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
-            services.AddDbContext<DataContext>(opt => 
+            services.AddDbContext<AcDataContext>(opt => 
             {
                 opt.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
+            });
+
+            services.AddDbContext<NhDataContext>(opt => 
+            {
+                opt.UseSqlServer(Configuration.GetConnectionString("NewHireConnection"));
+            });
+
+            services.AddDbContext<BstDataContext>(opt => 
+            {
+                opt.UseSqlServer(Configuration.GetConnectionString("BSTProjectListConnection"));
+            });
+
+            services.AddDbContext<SftyDataContext>(opt => 
+            {
+                opt.UseSqlServer(Configuration.GetConnectionString("SafetyConnection"));
             });
 
             services.AddCors(opt => {
@@ -38,6 +54,7 @@ namespace API
             });
 
             services.AddMediatR(typeof(List.Handler).Assembly);
+            services.AddAutoMapper(typeof(List.Handler).Assembly);
             
             services.AddControllers()
                 .AddFluentValidation(cfg => {

@@ -13,9 +13,9 @@ namespace API.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
-        private readonly DataContext _context;
+        private readonly AcDataContext _context;
 
-        public ValuesController(DataContext context)
+        public ValuesController(AcDataContext context)
         {
             _context = context;
         }

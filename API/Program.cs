@@ -20,7 +20,7 @@ namespace API
 
                 try
                 {
-                    var context = services.GetRequiredService<DataContext>();
+                    var context = services.GetRequiredService<AcDataContext>();
                     context.Database.Migrate();
                     Seed.SeedData(context);
                 }

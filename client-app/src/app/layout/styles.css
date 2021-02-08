@@ -3,12 +3,35 @@ body {
 }
 
 .ui.inverted.top.fixed.menu {
-  background-image: linear-gradient(
-    135deg,
-    rgb(24, 42, 115) 0%,
-    rgb(33, 138, 174) 69%,
-    rgb(32, 167, 172) 89%
-  ) !important;
+  background-color: #25408f !important;
+}
+
+
+.Footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 50px;
+  /* ----- */
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+  align-self: auto;
+  background-color: #25408f !important;
+  padding-left: 1.5rem;
+}
+
+.ced_header {
+  clear: both;
+  margin-top: 80px;
+  padding-bottom: 15px;
+  margin-bottom: 15px;
+  font-size: 26px;
+  text-align: center;
+  letter-spacing: 0px;
+  color: #000000;
 }
 
 /*home page styles*/
@@ -16,13 +39,7 @@ body {
 .masthead {
   display: flex;
   align-items: center;
-  background-image: linear-gradient(
-          135deg,
-          rgb(24, 42, 115) 0%,
-          rgb(33, 138, 174) 69%,
-          rgb(32, 167, 172) 89%
-  ) !important;
-  height: 100vh;
+  background-color: rgb(234, 234, 234) !important;
 }
 
 .masthead .ui.menu .ui.button,
@@ -41,3 +58,144 @@ body {
 }
 
 /*end home page styles*/
+
+.masthead .ui.card:hover .image {
+  background: #0C9ED9;
+  color: #fff; 
+}
+
+
+.margin_bottom_20 {
+  clear: both;
+  width: 100%;
+  height: 40px;
+  font-size: 1px;
+}
+
+.margin_bottom_40 {
+  clear: both;
+  width: 100%;
+  height: 40px;
+  font-size: 1px;
+}
+
+
+/* The customcheck */
+.customcheck {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 16px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.customcheck input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+  border-radius: 5px;
+}
+
+/* On mouse-over, add a grey background color */
+.customcheck:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.customcheck input:checked ~ .checkmark {
+  background-color: #2E2EFE;
+  border-radius: 5px;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.customcheck input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.customcheck .checkmark:after {
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+
+/* Employee Number Button*/
+
+.enumberbtn {
+  display: inline-block;
+  text-align: center;
+  vertical-align: middle;
+  padding: 4px 6px;
+  border: 1px solid #b2860f;
+  border-radius: 8px;
+  background: #ffdd19;
+  background: -webkit-gradient(linear, left top, left bottom, from(#ffdd19), to(#fec016));
+  background: -moz-linear-gradient(top, #ffdd19, #fec016);
+  background: linear-gradient(to bottom, #ffdd19, #fec016);
+  -webkit-box-shadow: #ffe61a 0px 0px 40px 0px;
+  -moz-box-shadow: #ffe61a 0px 0px 40px 0px;
+  box-shadow: #ffffff 0px 0px 40px 0px;
+  text-shadow: #7f600b 1px 1px 1px;
+  font: normal normal bold 20px arial;
+  color: #ffffff;
+  text-decoration: none;
+}
+.enumberbtn:hover,
+.enumberbtn:focus {
+  border: 1px solid #fec016;
+  background: #ffff1e;
+  background: -webkit-gradient(linear, left top, left bottom, from(#ffff1e), to(#ffe61a));
+  background: -moz-linear-gradient(top, #ffff1e, #ffe61a);
+  background: linear-gradient(to bottom, #ffff1e, #ffe61a);
+  color: #ffffff;
+  text-decoration: none;
+}
+.enumberbtn:active {
+  background: #b2860f;
+  background: -webkit-gradient(linear, left top, left bottom, from(#b2860f), to(#fec016));
+  background: -moz-linear-gradient(top, #b2860f, #fec016);
+  background: linear-gradient(to bottom, #b2860f, #fec016);
+}
+.enumberbtn:after{
+  content:  "\0000a0";
+  display: inline-block;
+  height: 24px;
+  width: 24px;
+  line-height: 24px;
+  margin: 0 -4px -6px 4px;
+  position: relative;
+  top: 0px;
+  left: -4px;
+  background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAA7EAAAOxAGVKw4bAAACb0lEQVRIiaWVQUsqURiGH+tmtDAnNNvMJhsIXRUkBC1cDgZtu92N22jTXbXoF9Q/ECIQBam7qK0UCC5E3agRKAYV0aZFrWJmkTlz7uYm6qgz11744Lxzvu975swZznEJIfhSJpNZNwzjNw4Uj8d/OclDCNGJ8/PzVLvdFnZxf38vUqnUWXftsJjohn18fLgdvRWwtbW1k06nz+zyJvr95OQkdvH+/s7c3JwjSD/AsdrttiPI2IAviCRJIyHfAgAYhoHH4xkK+TFOU0VRuL6+BmBqagqAYDDIxsbGTjqdnojH4z+/ch2v4OnpiXw+D8D09DSKotBqtZifnycSieDz+fB6vZa6kYDu//nq6opsNosQArfbTbPZpFQqsbS0hCRJSJKE3+//P0C3bm9vkSSp4x8fHzFNE4/HM7Ju5B4UCgUKhQIAuq7z/PzM8fExAHd3d8zMzHB0dMTh4aEzQPe5BPDy8kKlUul4TdN4fX0d6gf16PnOyWTyjxigRCIhVFUVDw8PQgghLi8vhaqqolgsWnL/9Rh8Fg1TvV5H13WCwSAAjUYDXddZXFy0rR25B4lEgpOTk45fXV3tmY/FYgDUajXngM/Pz87Y7/cjyzLNZhNZlpFlGYByuczs7CzhcNhSYwtotVqd8ebmJm9vb1QqFQ4ODohGo9zc3JDL5djd3WVvb89SYwswTbPHV6tVNE1DURRM0ySXy6FpGisrK5ZcRwDDMHp8JBJhYWGBQCCAYRgsLy+zv7/P2tqaJdcRoF/b29s9XlVVVFW1bTwUMGrDxtG37wM79azA6/VenJ6eBoQQFrDL5TKdPA+FQhfd838BmZONdDSx5fQAAAAASUVORK5CYII=") no-repeat left center transparent;
+  background-size: 100% 100%;
+}
